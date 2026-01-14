@@ -186,6 +186,12 @@ body {
     border-radius: var(--radius);
 }
 
+.app-icon-img {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius);
+}
+
 .app-info h3 {
     font-size: 18px;
     font-weight: 600;
@@ -259,6 +265,31 @@ body {
     margin-top: 8px;
     font-size: 12px !important;
     color: var(--text-muted) !important;
+}
+
+.github-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 20px;
+    background: var(--accent-gradient);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.github-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+.star-request {
+    margin-top: 12px;
+    font-size: 12px !important;
+    color: var(--accent-primary) !important;
+    font-weight: 500;
 }
 
 /* Footer */

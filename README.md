@@ -54,3 +54,11 @@ A browser extension that automatically tracks and copies references from Jenni A
 ## Credits
 
 Built with ❤️
+
+## Support
+
+Found a bug or have a suggestion? Feel free to reach out or contribute!
+
+🔗 **GitHub:** [github.com/debabrata2050/JenniRefs](https://github.com/debabrata2050/JenniRefs)
+
+⭐ **Support us by giving a star on GitHub!**
