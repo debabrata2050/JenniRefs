@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JenniRefs</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body class="light-theme">
+  <div class="container">
+    <header class="header">
+      <h1>📚 JenniRefs</h1>
+      <div class="header-actions">
+        <span id="count" class="count-badge">0</span>
+        <button id="refreshBtn" class="icon-btn" title="Refresh">🔄</button>
+        <button id="copyAllBtn" class="icon-btn" title="Copy All References">📋</button>
+        <button id="copyAllUrlsBtn" class="icon-btn" title="Copy All URLs">🔗</button>
+        <button id="clearBtn" class="icon-btn" title="Clear">🗑️</button>
+        <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <div class="status-bar">
+      <span id="status" class="status">Waiting for page...</span>
+      <span id="liveIndicator" class="live-indicator" title="Live tracking active">●</span>
+    </div>
+
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search references..." class="search-input">
+    </div>
+
+    <div id="referenceList" class="reference-list">
+      <div class="empty-state">
+        <span class="empty-icon">📖</span>
+        <p>No references found on this page</p>
+        <p class="empty-hint">Open Jenni AI to start tracking references</p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span id="lastUpdate">Last updated: --</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
