@@ -40,7 +40,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         applyTheme(theme);
         await chrome.storage.local.set({ theme: theme });
 
-        // Notify popup about theme change
-        chrome.runtime.sendMessage({ type: 'THEME_CHANGED', theme: theme });
+        // Notify popup about theme change (ignore if popup is not open)
+        try {
+            chrome.runtime.sendMessage({ type: 'THEME_CHANGED', theme: theme });
+        } catch (e) {
+            // Popup not open, that's fine
+        }
     }
 });
