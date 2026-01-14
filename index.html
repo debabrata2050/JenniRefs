@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JenniRefs - Reference Tracker for Jenni AI</title>
+    <meta name="description"
+        content="A browser extension that automatically tracks and copies references from Jenni AI. Features live tracking, DOI detection, and easy copy functionality.">
+    <link rel="icon" type="image/png" href="icons/icon48.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --secondary: #7c3aed;
+            --bg: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --gradient: linear-gradient(135deg, #4f46e5, #7c3aed);
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: radial-gradient(ellipse at top, #1a1a3e 0%, var(--bg) 70%);
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .hero .tagline {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: #252542;
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* How to Install */
+        .install {
+            padding: 100px 20px;
+            background: var(--bg-card);
+        }
+
+        .install-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .steps {
+            list-style: none;
+            counter-reset: step;
+        }
+
+        .steps li {
+            counter-increment: step;
+            padding: 20px 0;
+            padding-left: 60px;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="icons/icon128.png" alt="JenniRefs" class="hero-icon">
+        <h1>JenniRefs</h1>
+        <p class="tagline">A powerful browser extension that automatically tracks and copies references from Jenni AI
+        </p>
+        <div class="cta-buttons">
+            <a href="https://github.com/debabrata2050/JenniRefs/releases" class="btn btn-primary">
+                ⬇️ Download Extension
+            </a>
+            <a href="https://github.com/debabrata2050/JenniRefs" class="btn btn-secondary">
+                ⭐ Star on GitHub
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Auto Detection</h3>
+                <p>Automatically detects and extracts references from Jenni AI as you work on your documents.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Live Tracking</h3>
+                <p>Monitors for new references added dynamically without needing to refresh.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>DOI Detection</h3>
+                <p>Automatically converts DOI text to clickable links, works with all citation styles including Harvard.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3>Easy Copy</h3>
+                <p>Copy individual references, URLs, or all references at once with a single click.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔎</div>
+                <h3>Search & Filter</h3>
+                <p>Quickly find specific references using the built-in search functionality.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Light & Dark Mode</h3>
+                <p>Choose between light and dark themes to match your preference.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="install">
+        <div class="install-content">
+            <h2 class="section-title">How to Install</h2>
+            <ol class="steps">
+                <li>Download the extension from <a href="https://github.com/debabrata2050/JenniRefs/releases">GitHub
+                        Releases</a></li>
+                <li>Open Chrome/Edge and go to <code>chrome://extensions</code> or <code>edge://extensions</code></li>
+                <li>Enable <strong>Developer mode</strong> (toggle in top right)</li>
+                <li>Click <strong>Load unpacked</strong> and select the extension folder</li>
+                <li>Pin the extension to your toolbar and start using!</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Built with ❤️ | <a href="https://github.com/debabrata2050/JenniRefs">GitHub</a></p>
+        <p style="margin-top: 10px;">© 2026 JenniRefs. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
